@@ -1,0 +1,81 @@
+package Class25;
+
+interface Account {
+    void deposit(double amount);
+    void withdraw(double amount);
+    void viewBalance();
+    double calculateInterest();
+}
+
+class SavingsAccount implements Account {
+    private double balance;
+    private double interestRate = 0.04;
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited into Savings: " + amount);
+    }
+
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn from Savings: " + amount);
+        } else {
+            System.out.println("Insufficient balance in Savings");
+        }
+    }
+
+    public void viewBalance() {
+        System.out.println("Savings Account Balance: " + balance);
+    }
+
+    public double calculateInterest() {
+        return balance * interestRate;
+    }
+}
+class CurrentAccount implements Account {
+    private double balance;
+    private double overdraftLimit = 5000;
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited into Current: " + amount);
+    }
+
+    public void withdraw(double amount) {
+        if (balance + overdraftLimit >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn from Current: " + amount);
+        } else {
+            System.out.println("Overdraft limit exceeded");
+        }
+    }
+
+    public void viewBalance() {
+        System.out.println("Current Account Balance: " + balance);
+    }
+
+    public double calculateInterest() {
+        return 0.0;  // current accounts don’t provide interest
+    }
+}
+
+public class BankingSystem {
+    public static void main(String[] args) {
+    
+        Account savings = new SavingsAccount();
+        Account current = new CurrentAccount();
+        savings.deposit(1000);
+        savings.withdraw(200);
+        savings.viewBalance();
+        savings.calculateInterest();
+        System.out.println("Savings Interest: " + savings.calculateInterest());
+
+        current.deposit(500);
+        current.withdraw(7000);
+        current.viewBalance();
+        current.calculateInterest();
+        System.out.println("Current Interest: " + current.calculateInterest());
+
+    }
+}

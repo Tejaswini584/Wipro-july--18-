@@ -1,0 +1,26 @@
+package Class25;
+
+//Parent class with a final method
+class Animal {
+ public final void makeSound() {
+     System.out.println("Animal makes a sound");
+ }
+}
+
+//Child class trying to override final method
+class Dog extends Animal {
+ // Uncommenting the method below will cause a compilation error
+ /*
+ @Override
+ public void makeSound() {
+     System.out.println("Dog barks");
+ }
+ */
+}
+
+public class FinalMethodExample {
+ public static void main(String[] args) {
+     Dog d = new Dog();
+     d.makeSound(); // This will call Animal's makeSound()
+ }
+}

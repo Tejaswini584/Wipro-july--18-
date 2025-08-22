@@ -1,0 +1,10 @@
+package Class25;
+
+public final class FinalMethodExample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

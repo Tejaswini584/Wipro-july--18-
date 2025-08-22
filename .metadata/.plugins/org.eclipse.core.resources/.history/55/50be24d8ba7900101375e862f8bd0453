@@ -1,0 +1,68 @@
+package Wipro.Javaselinium;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import java.time.Duration;
+
+public class DatePicker {
+    public static void main(String[] args) throws InterruptedException {
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new org.openqa.selenium.chrome.ChromeDriver(chromeOptions);
+
+        driver.get("https://ui.shadcn.com/docs/components/date-picker");
+        driver.manage().window().maximize();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Open date picker
+        WebElement datePickerBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("date")));
+        datePickerBtn.click();
+
+        // Navigate to August 2025
+        while (true) {
+            WebElement monthYear = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[contains(@class,'CalendarCaption')]")));
+            String text = monthYear.getText();
+            if (text.equals("August 2025")) {
+                break;
+            }
+            WebElement nextButton = driver.findElement(By.xpath("//button[@aria-label='Go to next month']"));
+            nextButton.click();
+        }
+
+        // Select 13
+        WebElement day13 = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='13']")));
+        day13.click();
+
+        // Open again
+        datePickerBtn.click();
+
+        // Navigate again to August 2025
+        while (true) {
+            WebElement monthYear = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[contains(@class,'CalendarCaption')]")));
+            String text = monthYear.getText();
+            if (text.equals("August 2025")) {
+                break;
+            }
+            WebElement nextButton = driver.findElement(By.xpath("//button[@aria-label='Go to next month']"));
+            nextButton.click();
+        }
+
+        // Select 22
+        WebElement day22 = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='22']")));
+        day22.click();
+
+        driver.quit();
+    }
+}

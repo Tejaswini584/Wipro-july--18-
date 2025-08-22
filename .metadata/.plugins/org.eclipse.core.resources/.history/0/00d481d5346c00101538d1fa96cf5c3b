@@ -1,0 +1,19 @@
+package First_project;
+
+public class ArithmeticException {
+
+	public static void main(String[] args) {
+		
+		        try {
+		            int result = 10 / 0; // This will cause an ArithmeticException
+		            System.out.println(result);
+		        } catch (Exception e) {
+		            System.out.println("Error: Cannot divide by zero.");
+		            // You can also log the exception for debugging: e.printStackTrace();
+		        } finally {
+		            System.out.println("This finally block always executes.");
+		        }
+		    
+	}
+
+}
